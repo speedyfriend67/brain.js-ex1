@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Autoencoder Example</title>
+</head>
+<body>
+  <h1>Autoencoder Example</h1>
+  <input type="text" id="inputData" placeholder="Enter numerical data...">
+  <button onclick="runAutoencoder()">Run Autoencoder</button>
+  <p id="outputData"></p>
+
+  <!-- Include brain.js library -->
+  <script src="https://cdn.jsdelivr.net/npm/brain.js"></script>
+
+  <script>
+    function runAutoencoder() {
+      const inputData = document.getElementById('inputData').value.split(',').map(Number);
+
+      const net = new brain.NeuralNetwork();
+      
+      // Define the architecture of the autoencoder
+      net.train([{ input: inputData, output: inputData }]);
+
+      // Test the trained autoencoder
+      const output = net.run(inputData);
+
+      document.getElementById('outputData').innerText = "Output: " + output;
+    }
+  </script>
+</body>
+</html>
